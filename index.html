@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #eaf4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login and Prediction Form</h1>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        {% if name %}
+            <div class="result">
+                <h3>Welcome, {{ name }}!</h3>
+                <p>Age: {{ age }}</p>
+                <p>Address: {{ address }}</p>
+            </div>
+        {% endif %}
+        
+        <h2>Enter Patient Data for Prediction</h2>
+        <form action="/predict" method="POST">
+            <div class="form-group">
+                <label for="hypertension">Hypertension (0/1):</label>
+                <input type="number" id="hypertension" name="hypertension" required>
+            </div>
+            <div class="form-group">
+                <label for="heart_disease">Heart Disease (0/1):</label>
+                <input type="number" id="heart_disease" name="heart_disease" required>
+            </div>
+            <div class="form-group">
+                <label for="avg_glucose_level">Average Glucose Level:</label>
+                <input type="number" id="avg_glucose_level" name="avg_glucose_level" required>
+            </div>
+            <div class="form-group">
+                <label for="bmi">BMI:</label>
+                <input type="number" id="bmi" name="bmi" step="0.1" required>
+            </div>
+            <button type="submit">Predict Risk</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <h3>Prediction Result</h3>
+                <p><strong>Risk Level:</strong> {{ prediction }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
